@@ -17,9 +17,7 @@
 
             <property name = "javax.persistence.jdbc.url" value="jdbc:mysql://localhost/jpaentity" />
 
-            <property name = "javax.persistence.jdbc.url" value="jdbc:mysql://localhost/jpaentity" />
-
-            <property name = "javax.persistence.jdbc.user" value="dbadmin" />
+            <property name = "javax.persistence.jdbc.user" value="root" />
 
             <property name = "javax.persistence.jdbc.password" value="#Bucks4965" />
 

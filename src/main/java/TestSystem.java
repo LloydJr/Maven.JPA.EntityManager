@@ -8,7 +8,7 @@ import java.util.List;
 
 public class TestSystem {
     private static EntityManagerFactory ENTITY_MANAGER_FACTORY = Persistence
-            .createEntityManagerFactory("jpaentity");
+            .createEntityManagerFactory("jpaentity", null);
 
     public static void main(String[] args) {
         addCd(20, "Be mine", "Long song", 2022, "John Doe", 0.99);
