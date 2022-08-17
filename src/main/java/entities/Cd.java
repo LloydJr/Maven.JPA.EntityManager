@@ -1,25 +1,17 @@
 package entities;
 
-//import jakarta.persistence.Column;
-//import jakarta.persistence.Entity;
-//import jakarta.persistence.Id;
-//import jakarta.persistence.Table;
-
 import java.io.Serializable;
-
-//import jakarta.persistence.*;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "cd")
-public class Cd implements Serializable{
+@Table(name = "Cd")
+public class Cd implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @Column(name = "cdId", nullable = false)
+    @Column(name = "id", nullable = false)
     private Integer id;
     @Column(name = "title", unique = true)
     private String title;

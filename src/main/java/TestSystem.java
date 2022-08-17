@@ -1,24 +1,20 @@
 import entities.Cd;
-//import jakarta.persistence.*;
-//import jakarta.persistence.*;
 
-//import javax.persistence.*;
 import javax.persistence.*;
 import java.util.List;
 
 public class TestSystem {
     private static EntityManagerFactory ENTITY_MANAGER_FACTORY = Persistence
-            .createEntityManagerFactory("jpaentity", null);
+            .createEntityManagerFactory("jpaentity");
 
     public static void main(String[] args) {
-        addCd(20, "Be mine", "Long song", 2022, "John Doe", 0.99);
-        addCd(10, "Rejected", "Heart Break", 2020, "John Doe", 0.99);
-
-        getCd(20);
-        getAllCd();
-        updateTitle(20, "Now Mine");
-        deleteCd(10);
-
+//        addCd(20, "Be mine ", "Long song ", 2022, " John Doe ", 0.99);
+//        addCd(10, "Rejected ", "Heart Break ", 2020, " John Doe ", 0.99);
+//        addCd(30, "Rough Road ", "I had a hard time doing persistence ", 2022, " Lloyd ", 99.00);
+//        getCd(20);
+//        getAllCd();
+        updateTitle(30, "Too damn long ");
+//        deleteCd(10);
         ENTITY_MANAGER_FACTORY.close();
     }
 
@@ -49,39 +45,38 @@ public class TestSystem {
 
     public static void getCd(Integer id) {
         EntityManager entityManager = ENTITY_MANAGER_FACTORY.createEntityManager();
-        String query = "SELECT * FROM cd WHERE cd.id = :cdId";
+        String query = "SELECT x FROM Artist_Id x WHERE x.artist_id = :artId";
 
         TypedQuery<Cd> typedQuery = entityManager.createQuery(query, Cd.class);
         typedQuery.setParameter("id", id);
         Cd cd = null;
-        try{
+        try {
             cd = typedQuery.getSingleResult();
             System.out.println(cd.getTitle() + " " + cd.getDescription() + " "
                     + cd.getYear() + " " + cd.getArtist() + " " + cd.getPrice() + " ");
         } catch (NoResultException e) {
             e.printStackTrace();
-        }
-        finally {
+        } finally {
             entityManager.close();
         }
     }
+
     public static void getAllCd() {
         EntityManager entityManager = ENTITY_MANAGER_FACTORY.createEntityManager();
-        String query = "SELECT * FROM cd WHERE cd.id IS NOT NULL";
+        String query = "SELECT x FROM Cd x WHERE x.id IS NOT NULL";
         TypedQuery<Cd> typedQuery = entityManager.createQuery(query, Cd.class);
         List<Cd> cdList;
         try {
             cdList = typedQuery.getResultList();
-            cdList.forEach(cd-> System.out.println(cd.getTitle() + cd.getDescription()
+            cdList.forEach(cd -> System.out.println(cd.getTitle() + cd.getDescription()
                     + cd.getYear() + cd.getArtist() + cd.getPrice()));
-        }
-        catch (NoResultException e) {
+        } catch (NoResultException e) {
             e.printStackTrace();
-        }
-        finally {
+        } finally {
             entityManager.close();
         }
     }
+
     public static void updateTitle(Integer id, String title) {
         EntityManager entityManager = ENTITY_MANAGER_FACTORY.createEntityManager();
         EntityTransaction entityTransaction = null;
@@ -103,6 +98,7 @@ public class TestSystem {
             entityManager.close();
         }
     }
+
     public static void deleteCd(Integer id) {
         EntityManager entityManager = ENTITY_MANAGER_FACTORY.createEntityManager();
         EntityTransaction entityTransaction = null;
@@ -112,7 +108,7 @@ public class TestSystem {
             entityTransaction.begin();
             cd = entityManager.find(Cd.class, id);
             entityManager.remove(cd);
-            entityManager.persist(cd);
+//            entityManager.persist(cd);
             entityTransaction.commit();
         } catch (Exception e) {
             if (entityTransaction != null) {
